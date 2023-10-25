@@ -12,7 +12,7 @@ public interface ConsoleService {
     String showTasksFormatted();
 
     enum Action {
-        CREATE, REMOVE, UPDATE, VIEW, EXIT;
+        CREATE, REMOVE, UPDATE, VIEW, HELP, EXIT;
 
         public static String prettyValue() {
             final StringBuilder stringBuilder = new StringBuilder("(");

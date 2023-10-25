@@ -54,7 +54,7 @@ public class ConsoleServiceImpl implements ConsoleService {
             final String actionResponse = retrieveText();
 
             try {
-                updateAction = UpdateAction.valueOf(actionResponse.toUpperCase());
+                updateAction = UpdateAction.valueOf(actionResponse.toUpperCase().replaceAll(" ", "_"));
             } catch (final Exception p_e) {
                 print("Sorry, please enter a valid response.");
                 updateAction = null;
@@ -76,6 +76,15 @@ public class ConsoleServiceImpl implements ConsoleService {
                 System.exit(0);
             }
             case VIEW -> print("Here are your current tasks:\n" + showTasksFormatted());
+            case HELP -> {
+                print("""
+                        Welcome to the TodoTracker app!
+                        \tYou can create some tasks "todo" via the CREATE function.
+                        \tYou can also update/modify these tasks with the UPDATE command.
+                        \tFinished a task? Use the REMOVE command to remove a finished task.
+                        \tEnjoy!""");
+
+            }
             case CREATE -> {
                 print("Please enter the NAME of your new task:");
                 final String name = retrieveText();
