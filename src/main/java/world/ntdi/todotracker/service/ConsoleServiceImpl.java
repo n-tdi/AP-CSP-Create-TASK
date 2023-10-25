@@ -71,7 +71,10 @@ public class ConsoleServiceImpl implements ConsoleService {
     @Override
     public void respondToAction(final Action p_action) {
         switch (p_action) {
-            case EXIT -> System.exit(0);
+            case EXIT -> {
+                m_scanner.close();
+                System.exit(0);
+            }
             case VIEW -> print("Here are your current tasks:\n" + showTasksFormatted());
             case CREATE -> {
                 print("Please enter the NAME of your new task:");
