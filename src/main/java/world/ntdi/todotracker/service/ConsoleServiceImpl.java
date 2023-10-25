@@ -23,8 +23,12 @@ public class ConsoleServiceImpl implements ConsoleService {
         while (!validResponse) {
             final String actionResponse = m_scanner.nextLine();
 
+            if (actionResponse.isEmpty()) {
+                continue;
+            }
+
             try {
-                action = Action.valueOf(actionResponse);
+                action = Action.valueOf(actionResponse.toUpperCase());
             } catch (final Exception p_e) {
                 print("Sorry, please enter a valid response.");
                 action = null;
@@ -47,10 +51,10 @@ public class ConsoleServiceImpl implements ConsoleService {
         UpdateAction updateAction = null;
 
         while (!validResponse) {
-            final String actionResponse = m_scanner.nextLine();
+            final String actionResponse = retrieveText();
 
             try {
-                updateAction = UpdateAction.valueOf(actionResponse);
+                updateAction = UpdateAction.valueOf(actionResponse.toUpperCase());
             } catch (final Exception p_e) {
                 print("Sorry, please enter a valid response.");
                 updateAction = null;
@@ -166,7 +170,20 @@ public class ConsoleServiceImpl implements ConsoleService {
 
     @Override
     public String retrieveText() {
-        return m_scanner.nextLine();
+        boolean validResponse = false;
+        String response = null;
+
+        while (!validResponse) {
+            final String scannerResponse = m_scanner.nextLine();
+
+            if (scannerResponse.isEmpty()) {
+                continue;
+            }
+
+            response = scannerResponse;
+            validResponse = true;
+        }
+        return response;
     }
 
     @Override
@@ -175,15 +192,15 @@ public class ConsoleServiceImpl implements ConsoleService {
 
         final String separator = "-----------------";
 
-        stringBuilder.append(separator).append("\n|\n");
+        stringBuilder.append(separator);
 
         for (final Task task : m_taskService.getTasks()) {
+            stringBuilder.append("\n|\n");
             stringBuilder.append("|\t").append("NAME: ").append(task.getName()).append("\n");
             stringBuilder.append("|\t").append("DESCRIPTION: ").append(task.getDescription()).append("\n");
             stringBuilder.append("|\t").append("DUE DATE: ").append(task.getDueDate()).append("\n");
             stringBuilder.append("|\n");
-            stringBuilder.append(separator).append("\n");
-            stringBuilder.append("|\n");
+            stringBuilder.append(separator);
         }
 
         return stringBuilder.toString();
