@@ -7,6 +7,7 @@ public interface ConsoleService {
     UpdateAction askUpdateAction();
     void respondToAction(final Action p_action);
     int retrieveTask();
+    int retrieveInt();
     String retrieveText();
     String showTasksFormatted();
 

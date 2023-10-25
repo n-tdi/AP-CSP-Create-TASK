@@ -98,7 +98,28 @@ public class ConsoleServiceImpl implements ConsoleService {
                         final int taskIndex = retrieveTask();
 
                         print("What would you like to RENAME this task to?");
-                        retrieveText();
+                        final String name = retrieveText();
+
+                        m_taskService.updateTaskName(taskIndex, name);
+                        print("Successfully updated the name to " + name + ".");
+                    }
+                    case DESCRIPTION -> {
+                        final int taskIndex = retrieveTask();
+
+                        print("What would you like to set the DESCRIPTION of this task to?");
+                        final String description = retrieveText();
+
+                        m_taskService.updateTaskDescription(taskIndex, description);
+                        print("Successfully updated the description to " + description + ".");
+                    }
+                    case DUE_DATE -> {
+                        final int taskIndex = retrieveTask();
+
+                        print("What would you like to set the DUE DATE of this task to?");
+                        final String dueDate = retrieveText();
+
+                        m_taskService.updateTaskDueDate(taskIndex, dueDate);
+                        print("Successfully updated the due date to " + dueDate + ".");
                     }
                 }
             }
@@ -114,7 +135,7 @@ public class ConsoleServiceImpl implements ConsoleService {
         int task = -1;
 
         while (!validTask) {
-            final int selection = m_scanner.nextInt();
+            final int selection = retrieveInt();
 
             if (m_taskService.taskExists(selection)) {
                 validTask = true;
@@ -123,6 +144,24 @@ public class ConsoleServiceImpl implements ConsoleService {
         }
 
         return task;
+    }
+
+    @Override
+    public int retrieveInt() {
+        boolean validResponse = false;
+
+        int selection = -1;
+
+        while (!validResponse) {
+            try {
+                selection = m_scanner.nextInt();
+            } catch (final Exception p_e) {
+                print("Please try again,");
+                continue;
+            }
+            validResponse = true;
+        }
+        return selection;
     }
 
     @Override
