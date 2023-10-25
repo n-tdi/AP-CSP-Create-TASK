@@ -4,7 +4,7 @@ import world.ntdi.todotracker.model.Task;
 
 import java.util.List;
 
-public interface ITaskService {
+public interface TaskService {
     void addTask(final String p_name, final String p_description, final String p_dueDate);
     void removeTask(final int p_index);
     List<Task> getTasks();

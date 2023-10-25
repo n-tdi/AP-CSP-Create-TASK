@@ -2,14 +2,13 @@ package world.ntdi.todotracker.service;
 
 import world.ntdi.todotracker.model.Task;
 
-import java.util.Arrays;
-
-public interface IConsoleService {
+public interface ConsoleService {
     Action askAction();
     UpdateAction askUpdateAction();
     void respondToAction(final Action p_action);
-    Task retrieveTask();
+    int retrieveTask();
     String retrieveText();
+    String showTasksFormatted();
 
     enum Action {
         CREATE, REMOVE, UPDATE, VIEW, EXIT;
@@ -36,7 +35,7 @@ public interface IConsoleService {
     }
 
     enum UpdateAction {
-        NAME, DESCRIPTION, DUE_DATE;
+        NAME, DESCRIPTION, DUE_DATE, CANCEL;
 
         public static String prettyValue() {
             final StringBuilder stringBuilder = new StringBuilder("(");

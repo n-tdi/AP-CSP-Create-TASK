@@ -3,7 +3,7 @@ package world.ntdi.todotracker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import world.ntdi.todotracker.service.IConsoleService;
+import world.ntdi.todotracker.service.ConsoleService;
 
 @SpringBootApplication
 public class TodoTrackerApplication {
@@ -11,12 +11,12 @@ public class TodoTrackerApplication {
 	public static void main(String[] args) {
 		final ApplicationContext applicationContext = SpringApplication.run(TodoTrackerApplication.class, args);
 
-		final IConsoleService iConsoleService = applicationContext.getBean(IConsoleService.class);
+		final ConsoleService consoleService = applicationContext.getBean(ConsoleService.class);
 
 		while (true) {
-			final IConsoleService.Action action = iConsoleService.askAction();
+			final ConsoleService.Action action = consoleService.askAction();
 
-			iConsoleService.respondToAction(action);
+			consoleService.respondToAction(action);
 		}
 	}
 

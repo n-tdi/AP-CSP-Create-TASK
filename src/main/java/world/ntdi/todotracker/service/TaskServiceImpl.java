@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class TaskServiceImpl implements ITaskService {
+public class TaskServiceImpl implements TaskService {
     private final List<Task> m_tasks = new ArrayList<>();
 
     @Override
